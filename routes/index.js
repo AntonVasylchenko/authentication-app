@@ -1,0 +1,1 @@
+export { default as authenticationRoutes } from "./authenticationRoutes.js";
