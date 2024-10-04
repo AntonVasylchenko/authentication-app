@@ -9,6 +9,12 @@ const userModel = new PrismaClient().$extends({
                 const salt = await bcrypt.genSalt(10);
                 args.data.password = await bcrypt.hash(password, salt);
                 return query(args)
+            },
+            async update({ args, query }) {
+                const password = args.data.password;
+                const salt = await bcrypt.genSalt(10);
+                args.data.password = await bcrypt.hash(password, salt);
+                return query(args)
             }
         }
     },

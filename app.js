@@ -7,7 +7,7 @@ import "express-async-errors";
 import cookieParser from 'cookie-parser';
 
 import { notFoundMiddleware, errorHandlerMiddleware } from "./middleware/index.js";
-import { authenticationRoutes } from "./routes/index.js";
+import { authenticationRoutes, userRoutes } from "./routes/index.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,6 +18,7 @@ app.use(cookieParser(process.env.COOKIE_KEY));
 
 
 app.use("/api/v1/customer", authenticationRoutes);
+app.use("/api/v1/user", userRoutes);
 
 app.get('/', (req, res) => {
     res.json({ msg: "ok" })

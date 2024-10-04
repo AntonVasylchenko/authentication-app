@@ -59,3 +59,31 @@ export const isTokenValid = ({ token }) => {
 };
 
 
+
+export const createPagination = ({ take = 1, page = 1 }, totalCount) => {
+    const itemsPerPage = Number(take);
+    const currentPage = Number(page);
+    const skipItems = (currentPage - 1) * itemsPerPage;
+    const totalPages = Math.ceil(totalCount / itemsPerPage);
+
+    return {
+        take: itemsPerPage,
+        skip: skipItems,
+        totalItems: totalCount,
+        currentPage,
+        totalPages,
+    };
+}
+
+export const createSort = ({ sort, sortby = "asc" }, avaliableFields = []) => {
+    const typesSort = ['asc',"desc"];
+    if (!avaliableFields.includes(sort)) {
+        throw new customError.BadRequestError(`You are trying to sort by an invalid value such as "${sort}". Valid values are "${avaliableFields.join(",")}"`);
+    }    
+    const sortObject = {
+        property: sort,
+        type: typesSort.includes(sortby) ? sortby : "asc"
+    }
+
+    return sortObject
+}
