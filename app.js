@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_KEY));
 
+app.use(express.static("./public"));
 
 app.use("/api/v1/customer", authenticationRoutes);
 app.use("/api/v1/user", userRoutes);
